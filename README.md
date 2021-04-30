@@ -1,8 +1,7 @@
 # Use Gandi LiveDNS from Synology NAS box
 
 This project aims to provide a dynamic DNS capability for Synology NAS users that
-use [Gandi.net](https://www.gandi.net/en) domain name registrar. It based on [LiveDNS RESTful API](https://doc.livedns.gandi.net/).
-
+use [Gandi.net](https://www.gandi.net/en) domain name registrar. It based on [LiveDNS RESTful API][1].
 
 ## Installation
 
@@ -29,7 +28,8 @@ You need to provide the following configuration parameters:
 1. Username, which is ignored
 1. Gandy API key
 
-
 ## License
 
 This work is published under [public domain](https://creativecommons.org/licenses/publicdomain/) license.
+
+[1]: https://api.gandi.net/docs/livedns/
