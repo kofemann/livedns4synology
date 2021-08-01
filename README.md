@@ -13,10 +13,11 @@ $ sudo chmod +x /usr/local/bin/livedns.py
 ```
 1. update /etc.defaults/ddns_provider.conf to add new provider:
 ```
-[Gandi LiveDNS]
+[USER_Gandi LiveDNS]
         modulepath=/usr/local/bin/livedns.py
         queryurl=Gandi
 ```
+> NOTE: the provide name must start with **`USER_`** prefix (since DSM 7.0)
 
 Now on the new provider should be available under `Control Panel -> External Access -> DDNS`
 
