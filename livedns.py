@@ -53,13 +53,18 @@ if __name__ == '__main__':
     fqdn = sys.argv[3]
     ip = sys.argv[4]
 
-    if '.' not in fqdn:
+    dot = fqdn.find('.')
+    if dot == -1:
         print('notfqdn')
         exit()
 
-    dot = fqdn.index('.')
-    hostname = fqdn[:dot]
-    domain = fqdn[dot+1:]
+    # if this is a top domain (a-la kofemann.dev) then use '@' as a special placeholder for empty name
+    if fqdn.find('.', dot + 1) == -1:
+        hostname = '@'
+        domain = fqdn
+    else:
+        hostname = fqdn[:dot]
+        domain = fqdn[dot+1:]
 
     try:
         set_gandi_ip(ip, domain, hostname)
