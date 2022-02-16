@@ -11,7 +11,9 @@ use [Gandi.net](https://www.gandi.net/en) domain name registrar. It based on [Li
 $ sudo curl -o /usr/local/bin/livedns.py https://raw.githubusercontent.com/kofemann/livedns4synology/master/livedns.py
 $ sudo chmod +x /usr/local/bin/livedns.py
 ```
-1. update /etc.defaults/ddns_provider.conf to add new provider:
+
+1. update `/etc/ddns_provider.conf` and add a new provider:
+
 ```
 [USER_Gandi LiveDNS]
         modulepath=/usr/local/bin/livedns.py
