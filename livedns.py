@@ -44,31 +44,31 @@ def set_gandi_ip(addr, domain, hostname):
 
 if __name__ == '__main__':
 
-    if len(sys.argv) != 5:
-        print("Usage: livedns <username> <api key> <fqdn> <ip>")
+    if len(sys.argv) < 5:
+        print("Usage: livedns <username> <api key> <fqdn> <ip> [hostname...]")
         sys.exit(1)
 
     username = sys.argv[1] # ignored
     api_key = sys.argv[2]
     fqdn = sys.argv[3]
     ip = sys.argv[4]
+    hostnames = sys.argv[5:]
 
-    dot = fqdn.find('.')
-    if dot == -1:
         print('notfqdn')
+    segments = fqdn.split(".")
+    if len(segments) == 1:
         exit()
-
-    # if this is a top domain (a-la kofemann.dev) then use '@' as a special placeholder for empty name
-    if fqdn.find('.', dot + 1) == -1:
-        hostname = '@'
-        domain = fqdn
+    elif len(segments) == 2 and not hostnames:
+        # top domains (a-la kofemann.dev) require '@' as a special empty hostname
+        hostnames = ["@"]
     else:
-        hostname = fqdn[:dot]
-        domain = fqdn[dot+1:]
+        hostnames += segments.pop(0)
+    domain = ".".join(segments)
 
     try:
-        set_gandi_ip(ip, domain, hostname)
-        new_ip = get_gandi_ip(domain, hostname)
+        for hostname in hostnames:
+            set_gandi_ip(ip, domain, hostname)
+            new_ip = get_gandi_ip(domain, hostname)
         print('good')
     except urllib.error.HTTPError as e:
         if e.code == 401:
